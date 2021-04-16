@@ -1,0 +1,37 @@
+{%extends "base.html"%} {%block content%}
+<article class="media content-section">
+  <img
+    class="rounded-circle article-img"
+    src="{{object.auther.profile.image.url}}"
+    alt=""
+  />
+  <div class="media-body">
+    <div class="article-metadata">
+      <a class="mr-2" href="{%url 'user_posts' object.auther.username%}"
+        >{{ object.auther.username }}</a
+      >
+      <!-- https://docs.djangoproject.com/en/3.1/ref/templates/builtins/#date -->
+      <small class="text-muted">{{ object.dete_posted | date:"F d, Y"}}</small>
+
+      {%if object.auther == user%}
+      <div>
+        <a
+          href="{%url 'post_update' object.id%}"
+          class="btn btn-outline-secondary btn-sm btn-sm mb-1 mt-1"
+        >
+          Update</a
+        >
+        <a
+          href="{%url 'post_delete' object.id%}"
+          class="btn btn-outline-danger btn-sm mb-1 mt-1"
+        >
+          Delete</a
+        >
+        {%endif%}
+      </div>
+      <h2 class="article-title">{{ object.title }}</h2>
+      <p class="article-content">{{ object.content }}</p>
+    </div>
+  </div>
+</article>
+{%endblock%}
